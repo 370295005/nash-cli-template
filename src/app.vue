@@ -1,9 +1,9 @@
 <template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+  <router-view v-slot="{ Component }">
+    <component :is="Component" />
+  </router-view>
 </template>
-<script></script>
+<script setup></script>
 <style lang="stylus">
 #app {
   width: 100%;

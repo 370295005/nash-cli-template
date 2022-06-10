@@ -16,7 +16,7 @@ module.exports = {
     sourceType: 'module',
     requireConfigFile: false
   },
-  extends: ['standard', 'plugin:vue/essential', '@vue/prettier', 'plugin:prettier/recommended'],
+  extends: ['standard', 'plugin:vue/essential', 'plugin:prettier/recommended'],
   rules: {
     // 修复es6字符串拼接babel报错
     indent: [

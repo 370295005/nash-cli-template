@@ -1,11 +1,7 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
 import App from './app.vue'
 import store from './store'
 import router from './router'
 import '@/assets/style/reset.styl'
-const vm = new Vue({
-  el: '#app',
-  router,
-  store,
-  render: (h) => h(App)
-})
+const app = createApp(App)
+app.use(router).use(store).mount('#app')

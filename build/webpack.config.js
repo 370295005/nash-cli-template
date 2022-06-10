@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 const EslintWebpackPlugin = require('eslint-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 // const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
@@ -15,7 +15,7 @@ module.exports = {
   resolve: {
     alias: {
       '@': path.resolve(__dirname, '../src'),
-      vue$: 'vue/dist/vue.runtime.esm.js'
+      vue: 'vue/index.js'
     },
     modules: ['node_modules', path.resolve(__dirname, '../node_modules')],
     extensions: ['.js', '.vue', '.json', '.ts', '.mjs', '.jsx', '.tsx', 'wasm']

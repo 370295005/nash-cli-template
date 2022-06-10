@@ -2,8 +2,8 @@
   <div class="index-page">Index</div>
 </template>
 
-<script>
-export default {}
+<script setup>
+console.log('Index')
 </script>
 
 <style lang="stylus">

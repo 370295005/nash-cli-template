@@ -56,5 +56,6 @@ module.exports = merge(config, {
       }),
       new CssMinimizerPlugin()
     ]
-  }
+  },
+  devtool: false
 })

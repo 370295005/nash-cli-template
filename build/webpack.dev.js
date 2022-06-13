@@ -21,11 +21,12 @@ module.exports = merge(config, {
       progress: true
     },
     host: 'localhost',
-    port: '5990',
+    port: '7900',
     allowedHosts: 'auto',
     open: false,
     compress: true,
-    hot: false
+    hot: false,
+    historyApiFallback: true
   },
   target: 'web'
 })

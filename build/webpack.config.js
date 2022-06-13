@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const { VueLoaderPlugin } = require('vue-loader')
 const EslintWebpackPlugin = require('eslint-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 // const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
@@ -12,10 +11,14 @@ module.exports = {
   entry: {
     app: '/src/index.js'
   },
+  node: {
+    fs: 'empty',
+    net: 'empty'
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, '../src'),
-      vue: 'vue/index.js'
+      vue$: 'vue/dist/vue.runtime.esm.js'
     },
     modules: ['node_modules', path.resolve(__dirname, '../node_modules')],
     extensions: ['.js', '.vue', '.json', '.ts', '.mjs', '.jsx', '.tsx', 'wasm']
@@ -87,7 +90,7 @@ module.exports = {
             }
           }
         ],
-        exclude: /node_modules|static/
+        exclude: /static/
       },
       {
         test: /\.(mp4|mp3|m3u8)$/,
@@ -103,7 +106,7 @@ module.exports = {
         exclude: /node_modules|static/
       },
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         use: [
           {
             loader: 'cache-loader',
@@ -121,12 +124,6 @@ module.exports = {
         ],
         include: path.resolve(__dirname, '../src'),
         exclude: /node_modules | ^TcPlayer | static/
-      },
-      {
-        test: /\.vue$/,
-        use: ['cache-loader', 'vue-loader'],
-        include: path.resolve(__dirname, '../src'),
-        exclude: /node_modules/
       }
     ]
   },
@@ -135,12 +132,12 @@ module.exports = {
       filename: 'css/[name].[contenthash:8].css',
       chunkFilename: 'css/[name].[contenthash:8].min.css'
     }),
-    new VueLoaderPlugin(),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      filename: `index.html`,
+      filename: 'index.html',
       chunks: ['app'],
       template: 'public/index.html',
+      // scriptLoading: 'defer',
       hash: true,
       minify: {
         removeComments: true,
@@ -172,26 +169,11 @@ module.exports = {
       maxInitialRequests: 10,
       automaticNameDelimiter: '_',
       cacheGroups: {
-        vue: {
-          test: /(vue|vue-router|vuex)/,
-          filename: 'js/vue.bundle.js',
+        react: {
+          test: /(react|react-router-dom)/,
+          name: 'js/react.bundle.js',
           chunks: 'all',
           priority: 10,
-          reuseExistingChunk: true
-        },
-        vant: {
-          test: /vant/,
-          filename: 'js/vant.bundle.js',
-          chunks: 'all',
-          priority: 5,
-          reuseExistingChunk: true
-        },
-        swiper: {
-          test: /(vue-awesome-swiper|swiper)/,
-          filename: 'js/swiper.bundle.js',
-          chunks: 'all',
-          priority: 10,
-          minChunks: 1,
           reuseExistingChunk: true
         }
       }

@@ -1,7 +1,5 @@
-import { createApp } from 'vue'
-import App from './app.vue'
-import store from './store'
-import router from './router'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
 import '@/assets/style/reset.styl'
-const app = createApp(App)
-app.use(router).use(store).mount('#app')
+ReactDOM.render(<App />, document.getElementById('root'))
